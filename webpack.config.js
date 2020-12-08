@@ -1,13 +1,13 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   entry: {
-    main: "./src/index.js",
+    main: './src/index.js',
   },
   output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "dist"),
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist'),
   },
   modules: {
     rules: [
@@ -15,13 +15,13 @@ module.exports = {
         test: /\.((c|sa|sc)ss)$/i,
         use: [
           // Add exports of a module as style to DOM
-          { loader: "style-loader" },
+          { loader: 'style-loader' },
 
           // Loads CSS file with resolved imports and returns CSS code
-          { loader: "css-loader" },
+          { loader: 'css-loader' },
 
           // Loads and compiles a SASS/SCSS file
-          { loader: "sass-loader" },
+          { loader: 'sass-loader' },
         ],
       },
       // {
@@ -33,25 +33,23 @@ module.exports = {
       // },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-        loader: "url-loader",
+        loader: 'url-loader',
         options: {
           limit: 8192,
-          name: "[path][name].[ext]",
+          name: '[path][name].[ext]',
         },
       },
       {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env"],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
     ],
   },
-  plugins: [
-    mini - css - extract - plugin || extract - css - chunks - webpack - plugin,
-  ],
+  plugins: [],
 };
