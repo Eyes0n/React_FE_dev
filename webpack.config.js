@@ -15,6 +15,16 @@ module.exports = {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
+  devtool: 'inline-source-map',
+  devServer: {
+    // Enable webpack's Hot Module Replacement feature
+    hot: true,
+
+    // Proxying some URLs can be useful when you have a separate API backend development server and you want to send API requests on the same domain.
+    proxy: {
+      '/api': 'http://localhost:3000',
+    },
+  },
   module: {
     rules: [
       {
@@ -51,7 +61,7 @@ module.exports = {
         },
       },
       {
-        test: /\.m?js$/,
+        test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
