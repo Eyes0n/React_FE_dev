@@ -4,10 +4,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+// It will search for CSS assets during the Webpack build and will optimize \ minimize the CSS
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+const TerserPlugin = require('terser-webpack-plugin');
+
+const mode = process.env.NODE_ENV || 'development';
 
 module.exports = {
-  mode: process.env.NODE_ENV,
+  mode,
   entry: {
     main: './src/index.js',
   },
@@ -97,4 +102,19 @@ module.exports = {
       new MiniCssExtractPlugin({ filename: '[name].css' }),
     new CleanWebpackPlugin(),
   ].filter(Boolean),
+  optimization: {
+    minimizer:
+      mode === 'production'
+        ? [
+            new OptimizeCSSAssetsPlugin(),
+            new TerserPlugin({
+              terserOptions: {
+                compress: {
+                  drop_console: true, // 콘솔 로그를 제거한다
+                },
+              },
+            }),
+          ]
+        : [],
+  },
 };
