@@ -106,7 +106,10 @@ module.exports = {
     minimizer:
       mode === 'production'
         ? [
+            // css파일 압축
             new OptimizeCSSAssetsPlugin(),
+
+            // js 난독화 & debugger 구문을 제거 plugin
             new TerserPlugin({
               terserOptions: {
                 compress: {
