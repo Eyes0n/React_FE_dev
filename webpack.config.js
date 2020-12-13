@@ -127,5 +127,10 @@ module.exports = {
             }),
           ]
         : [],
+
+    splitChunks: {
+      // include all types of chunks
+      chunks: 'all',
+    },
   },
 };
