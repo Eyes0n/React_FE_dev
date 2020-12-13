@@ -25,10 +25,18 @@ module.exports = {
     // Enable webpack's Hot Module Replacement feature
     hot: true,
 
+    // show only compiler errors
+    overlay: true,
+
+    stats: 'errors-only',
+
     // Proxying some URLs can be useful when you have a separate API backend development server and you want to send API requests on the same domain.
     proxy: {
-      '/api': 'http://localhost:3000',
+      '/api': 'http://localhost:8081',
     },
+
+    // When using the HTML5 History API, the index.html page will likely have to be served in place of any 404 responses.
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -109,11 +117,11 @@ module.exports = {
             // css파일 압축
             new OptimizeCSSAssetsPlugin(),
 
-            // js 난독화 & debugger 구문을 제거 plugin
+            // js 난독화 & debugger 구문 제거 plugin
             new TerserPlugin({
               terserOptions: {
                 compress: {
-                  drop_console: true, // 콘솔 로그를 제거한다
+                  drop_console: true, // 콘솔 로그 제거
                 },
               },
             }),
